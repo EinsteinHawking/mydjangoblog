@@ -2,16 +2,20 @@ from django.db import models
 
 # Create your models here.
 
-class Reporter(models.Model):
-    full_name = models.CharField(max_length=20)
-    def __str__(self):
-        return self.full_name
+import mongoengine
 
-class Article(models.Model):
-    pub_date = models.DateField()
-    headline = models.CharField(max_length=200)
-    content = models.TextField()
-    reporter = models.ForeignKey(Reporter,on_delete=models.CASCADE)
+class Tags(mongoengine.Document):
+    tag_name=mongoengine.StringField()
+    tag_url=mongoengine.StringField()
+    count = mongoengine.IntField()
+    meta = {'collection': 'tags'}
 
-    def __str__(self):
-        return self.headline
+class Work(mongoengine.Document):
+    name = mongoengine.StringField()
+    author = mongoengine.StringField()
+    dynasty = mongoengine.StringField()
+    content = mongoengine.StringField()
+    tags = mongoengine.ListField()
+
+    wk_objs = models.Manager()
+    meta = {'collection':'works'}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+<!--引入并使用 jquery    -->
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+    </script>
+
+    <script>
+
+    // var cont = "";
+    $(document).ready(function(){
+
+      // $("a").click(function(){
+      //   cont=$(this).html();
+
+
+      // });
+
+    
+    $(".tag").click(function () {
+        <!--获取标签内容-->
+        var cont=$(this).html();
+        $.ajax({
+          url: "/main/",
+          type: "GET",
+          data: {
+              username: cont,
+
+              },
+          <!--async : false,-->
+          success: function (data) {
+            <!--var dat = JSON.parse(data);-->
+            <!--var odj = {a:1,b:2,c:3};-->
+            <!--var k = $.param(odj);-->
+            <!--alert(k);-->
+          }
+        })
+        window.location.href= "/main"
+      })
+
+    });
+
+    </script>
+
+</head>
+<body>
+
+<p>我是首页</p>
+
+
+{% for tag in tags %}
+
+    <p class="tag">{{tag.tag_name}}</p>
+
+{% endfor %}
+
+
+<button id="subm">ajax数据交换</button>
+
+
+<hr/>
+
+<a href="{% url 'test' %}"> 我是一个测试的a标签</a>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>helloDjango</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <h3>get 提交数据</h3>
+    <input type="number" id="num1"/>&nbsp;&nbsp;
+    <input type="number" id="num2"/>
+    <button onclick="fun_get();">&nbsp;&nbsp;</button>
+    <font style="color:red"><span id="result_get"></span></font>
+
+</body>
+<script>
+
+    function fun_get() {
+
+        var a = $("#num1").val();
+        var a = $("#num2").val();
+        $.get("/ajax/get/",{'a':a,'b':b},function(ret){
+            $('#result_get'.html(ret));
+        });
+
+    }
+
+</script>
+</html>
